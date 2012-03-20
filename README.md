@@ -65,7 +65,7 @@ To run tests
 ## Credits
 * Based largely on the gem https://github.com/alexreisner/google_custom_search 
 * Awesome ResponseData class from https://github.com/mikedemers/rbing
-* Work done while working on a project for the company http://reInteractive.net in sunny Sydney.  A great ruby shop should need help with something.
+* Work done while working on a project for the company http://reInteractive.net in sunny Sydney.  A great ruby shop should you need help with something.
 
 ## TODO
 * pretty light on the tests
