@@ -1,0 +1,238 @@
+{
+ "kind": "customsearch#search",
+ "url": {
+  "type": "application/json",
+  "template": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+ },
+ "queries": {
+  "request": [
+   {
+    "title": "Google Custom Search - poker",
+    "totalResults": "40300000",
+    "searchTerms": "poker",
+    "count": 10,
+    "startIndex": 91,
+    "inputEncoding": "utf8",
+    "outputEncoding": "utf8",
+    "safe": "off",
+    "cx": "002432975944642411257:ztx9u0hzbcw"
+   }
+  ],
+  "previousPage": [
+   {
+    "title": "Google Custom Search - poker",
+    "totalResults": "40300000",
+    "searchTerms": "poker",
+    "count": 10,
+    "startIndex": 81,
+    "inputEncoding": "utf8",
+    "outputEncoding": "utf8",
+    "safe": "off",
+    "cx": "002432975944642411257:ztx9u0hzbcw"
+   }
+  ]
+ },
+ "context": {
+  "title": "ICMS Dev"
+ },
+ "searchInformation": {
+  "searchTime": 0.191408,
+  "formattedSearchTime": "0.19",
+  "totalResults": "40300000",
+  "formattedTotalResults": "40,300,000"
+ },
+ "items": [
+  {
+   "kind": "customsearch#result",
+   "title": "Two Plus Two Poker Forum - Poker Strategy Forums",
+   "htmlTitle": "Two Plus Two \u003cb\u003ePoker\u003c/b\u003e Forum - \u003cb\u003ePoker\u003c/b\u003e Strategy Forums",
+   "link": "http://forumserver.twoplustwo.com/",
+   "displayLink": "forumserver.twoplustwo.com",
+   "snippet": "Poker discussion forum with over 250000 members and 100 different poker   forums. Learn poker strategy & sharpen your poker skills for tournament poker,   texas ...",
+   "htmlSnippet": "\u003cb\u003ePoker\u003c/b\u003e discussion forum with over 250000 members and 100 different \u003cb\u003epoker\u003c/b\u003e \u003cbr\u003e  forums. Learn \u003cb\u003epoker\u003c/b\u003e strategy &amp; sharpen your \u003cb\u003epoker\u003c/b\u003e skills for tournament \u003cb\u003epoker\u003c/b\u003e, \u003cbr\u003e  texas \u003cb\u003e...\u003c/b\u003e",
+   "cacheId": "jCZFwmGLCuYJ",
+   "formattedUrl": "forumserver.twoplustwo.com/",
+   "htmlFormattedUrl": "forumserver.twoplustwo.com/"
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Fundoo Poker - India's number one poker portal!",
+   "htmlTitle": "Fundoo \u003cb\u003ePoker\u003c/b\u003e - India&#39;s number one \u003cb\u003epoker\u003c/b\u003e portal!",
+   "link": "http://www.fundoopoker.com/",
+   "displayLink": "www.fundoopoker.com",
+   "snippet": "At FundooPoker.com we are committed to providing the best, most useful and  accurate ...",
+   "htmlSnippet": "At FundooPoker.com we are committed to providing the best, most useful and  accurate \u003cb\u003e...\u003c/b\u003e"
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "World Tavern Poker America's #1 Bar Poker League",
+   "htmlTitle": "World Tavern \u003cb\u003ePoker\u003c/b\u003e America&#39;s #1 Bar \u003cb\u003ePoker\u003c/b\u003e League",
+   "link": "http://www.worldtavernpoker.com/",
+   "displayLink": "www.worldtavernpoker.com",
+   "snippet": "REFER A BAR · INVITE A FRIEND · PHOTO GALLERY · HALL OF FAME ·   POKER PICK UP LINES · WORLD TAVERN OPEN · POKER SUPPLIES - BAR ·   COOL ...",
+   "htmlSnippet": "REFER A BAR &middot; INVITE A FRIEND &middot; PHOTO GALLERY &middot; HALL OF FAME &middot; \u003cbr\u003e  \u003cb\u003ePOKER\u003c/b\u003e PICK UP LINES &middot; WORLD TAVERN OPEN &middot; \u003cb\u003ePOKER\u003c/b\u003e SUPPLIES - BAR &middot; \u003cbr\u003e  COOL \u003cb\u003e...\u003c/b\u003e",
+   "cacheId": "wJJqkbvCx6cJ",
+   "formattedUrl": "www.worldtavernpoker.com/",
+   "htmlFormattedUrl": "www.worldtavern\u003cb\u003epoker\u003c/b\u003e.com/",
+   "pagemap": {
+    "cse_image": [
+     {
+      "src": "http://www.worldtavernpoker.com/Admin/uploads/image/TOC-Logo.jpg"
+     }
+    ],
+    "cse_thumbnail": [
+     {
+      "width": "170",
+      "height": "128",
+      "src": "https://encrypted-tbn0.google.com/images?q=tbn:ANd9GcS9HpBmspaWOd4GZg7xMV1sZMZzrAMxfPdmCHvRG34ZOUBvd-P-YcIpfi8"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Sky Poker - Play Online Poker and Free Poker - Up to £1000 FREE!",
+   "htmlTitle": "Sky \u003cb\u003ePoker\u003c/b\u003e - Play Online \u003cb\u003ePoker\u003c/b\u003e and Free \u003cb\u003ePoker\u003c/b\u003e - Up to £1000 FREE!",
+   "link": "http://www.skypoker.com/",
+   "displayLink": "www.skypoker.com",
+   "snippet": "For free poker join Sky Poker! Get up to a £1000 Welcome Bonus plus £10   absolutely free. Play online poker and compete with players at every level across   the ...",
+   "htmlSnippet": "For free \u003cb\u003epoker\u003c/b\u003e join Sky \u003cb\u003ePoker\u003c/b\u003e! Get up to a £1000 Welcome Bonus plus £10 \u003cbr\u003e  absolutely free. Play online \u003cb\u003epoker\u003c/b\u003e and compete with players at every level across \u003cbr\u003e  the \u003cb\u003e...\u003c/b\u003e",
+   "cacheId": "bweveMgGImYJ",
+   "formattedUrl": "www.skypoker.com/",
+   "htmlFormattedUrl": "www.sky\u003cb\u003epoker\u003c/b\u003e.com/",
+   "pagemap": {
+    "cse_image": [
+     {
+      "src": "http://www.skypoker.com/img/cms/211x123welcome180211.jpg"
+     }
+    ],
+    "cse_thumbnail": [
+     {
+      "width": "168",
+      "height": "98",
+      "src": "https://encrypted-tbn1.google.com/images?q=tbn:ANd9GcQYhP7Y11iPjCfU9tJKuFvR4tKKX-VxGLSloLGg5miI5LnxX2OJ3JGP2w"
+     }
+    ],
+    "metatags": [
+     {
+      "copyright": "2008 BSkyB; All Rights Reserved"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Online poker guide, exclusive bonuses from best poker rooms ...",
+   "htmlTitle": "Online \u003cb\u003epoker\u003c/b\u003e guide, exclusive bonuses from best \u003cb\u003epoker\u003c/b\u003e rooms \u003cb\u003e...\u003c/b\u003e",
+   "link": "http://www.launchpoker.com/",
+   "displayLink": "www.launchpoker.com",
+   "snippet": "Comprehensive online poker guide at LaunchPoker.com - poker rules, online   poker room reviews, and poker tips on how to play poker.",
+   "htmlSnippet": "Comprehensive online \u003cb\u003epoker\u003c/b\u003e guide at LaunchPoker.com - \u003cb\u003epoker\u003c/b\u003e rules, online \u003cbr\u003e  \u003cb\u003epoker\u003c/b\u003e room reviews, and \u003cb\u003epoker\u003c/b\u003e tips on how to play \u003cb\u003epoker\u003c/b\u003e.",
+   "cacheId": "zrVQMcZENZsJ",
+   "formattedUrl": "www.launchpoker.com/",
+   "htmlFormattedUrl": "www.launch\u003cb\u003epoker\u003c/b\u003e.com/",
+   "pagemap": {
+    "cse_image": [
+     {
+      "src": "http://www.launchpoker.com/files/images/Chips%20and%20Cards_5.jpg"
+     }
+    ],
+    "cse_thumbnail": [
+     {
+      "width": "275",
+      "height": "183",
+      "src": "https://encrypted-tbn1.google.com/images?q=tbn:ANd9GcRD04jSeP1uW2_p9zJi0ZEBCy3_n7ce9-OaMvhnoNhHGqCASGQX359kXek"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Poker Rules for Beginners l Get All the Official Rules of Poker",
+   "htmlTitle": "\u003cb\u003ePoker\u003c/b\u003e Rules for Beginners l Get All the Official Rules of \u003cb\u003ePoker\u003c/b\u003e",
+   "link": "http://www.pokerlistings.com/poker-rules",
+   "displayLink": "www.pokerlistings.com",
+   "snippet": "Learn poker rules quickly with PokerListings' easy-to-understand guide to the   official rules of poker – Texas Holdem, Omaha, 7 Card Stud and more covered.",
+   "htmlSnippet": "Learn \u003cb\u003epoker\u003c/b\u003e rules quickly with PokerListings&#39; easy-to-understand guide to the \u003cbr\u003e  official rules of \u003cb\u003epoker\u003c/b\u003e – Texas Holdem, Omaha, 7 Card Stud and more covered.",
+   "cacheId": "TF8HL569zyQJ",
+   "formattedUrl": "www.pokerlistings.com/poker-rules",
+   "htmlFormattedUrl": "www.\u003cb\u003epoker\u003c/b\u003elistings.com/\u003cb\u003epoker\u003c/b\u003e-rules",
+   "pagemap": {
+    "cse_image": [
+     {
+      "src": "http://edge1.pokerlistings.com/images/WHWCalculator.jpg"
+     }
+    ],
+    "cse_thumbnail": [
+     {
+      "width": "235",
+      "height": "154",
+      "src": "https://encrypted-tbn0.google.com/images?q=tbn:ANd9GcQCWaFJ4zcTm0JPjpV1V7aJVKLckx1VTX6D7jq2XuO37t6kcyA_Ij4llVGA"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Glossary of poker terms - Wikipedia, the free encyclopedia",
+   "htmlTitle": "Glossary of \u003cb\u003epoker\u003c/b\u003e terms - Wikipedia, the free encyclopedia",
+   "link": "http://en.wikipedia.org/wiki/Glossary_of_poker_terms",
+   "displayLink": "en.wikipedia.org",
+   "snippet": "The following is a glossary of poker terms used in the card game of poker. It   supplements the Glossary of card terms. Besides the terms listed here, there are ...",
+   "htmlSnippet": "The following is a glossary of \u003cb\u003epoker\u003c/b\u003e terms used in the card game of \u003cb\u003epoker\u003c/b\u003e. It \u003cbr\u003e  supplements the Glossary of card terms. Besides the terms listed here, there are \u003cb\u003e...\u003c/b\u003e",
+   "cacheId": "mYz7xnHj1C4J",
+   "formattedUrl": "en.wikipedia.org/wiki/Glossary_of_poker_terms",
+   "htmlFormattedUrl": "en.wikipedia.org/wiki/Glossary_of_\u003cb\u003epoker\u003c/b\u003e_terms"
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Online Poker - Play Free Online Poker Games At UB Poker Room",
+   "htmlTitle": "Online \u003cb\u003ePoker\u003c/b\u003e - Play Free Online \u003cb\u003ePoker\u003c/b\u003e Games At UB \u003cb\u003ePoker\u003c/b\u003e Room",
+   "link": "http://www.ubpoker.eu/",
+   "displayLink": "www.ubpoker.eu",
+   "snippet": "If you enjoy playing poker, you'll love the incredible selection of online poker   games offered at UB. Formerly UltimateBet.com, UB offers the best free online ...",
+   "htmlSnippet": "If you enjoy playing \u003cb\u003epoker\u003c/b\u003e, you&#39;ll love the incredible selection of online \u003cb\u003epoker\u003c/b\u003e \u003cbr\u003e  games offered at UB. Formerly UltimateBet.com, UB offers the best free online \u003cb\u003e...\u003c/b\u003e",
+   "cacheId": "dzmI8hTTn9wJ",
+   "formattedUrl": "www.ubpoker.eu/",
+   "htmlFormattedUrl": "www.ub\u003cb\u003epoker\u003c/b\u003e.eu/",
+   "pagemap": {
+    "cse_image": [
+     {
+      "src": "http://www.ubpoker.eu/sites/default/themes/ub/images/common/home/video-preview-home.jpg"
+     }
+    ],
+    "cse_thumbnail": [
+     {
+      "width": "214",
+      "height": "120",
+      "src": "https://encrypted-tbn2.google.com/images?q=tbn:ANd9GcRECQGgCP-5fBgOnu627EJMX6biaLeLz7mFJGFSCLldrvTkYjkizow1RA"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Poker Tracker",
+   "htmlTitle": "\u003cb\u003ePoker\u003c/b\u003e Tracker",
+   "link": "http://www.pokertracker.com/",
+   "displayLink": "www.pokertracker.com",
+   "snippet": "Shareware statistical program for analyzing Texas Hold'em play using hand   histories. [Win]",
+   "htmlSnippet": "Shareware statistical program for analyzing Texas Hold&#39;em play using hand \u003cbr\u003e  histories. [Win]",
+   "cacheId": "cqn2JxUSex4J",
+   "formattedUrl": "www.pokertracker.com/",
+   "htmlFormattedUrl": "www.\u003cb\u003epoker\u003c/b\u003etracker.com/"
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "SeriousPoker.com - Dan's Poker Dictionary",
+   "htmlTitle": "SeriousPoker.com - Dan&#39;s \u003cb\u003ePoker\u003c/b\u003e Dictionary",
+   "link": "http://www.seriouspoker.com/dictionary.html",
+   "displayLink": "www.seriouspoker.com",
+   "snippet": "In games played for low, an unpaired low hand is referred to by its highest card,   often its highest two cards and sometimes more if needed. So 8432A (in ace to ...",
+   "htmlSnippet": "In games played for low, an unpaired low hand is referred to by its highest card, \u003cbr\u003e  often its highest two cards and sometimes more if needed. So 8432A (in ace to \u003cb\u003e...\u003c/b\u003e",
+   "cacheId": "Sgro5g5ojoMJ",
+   "formattedUrl": "www.seriouspoker.com/dictionary.html",
+   "htmlFormattedUrl": "www.serious\u003cb\u003epoker\u003c/b\u003e.com/dictionary.html"
+  }
+ ]
+}

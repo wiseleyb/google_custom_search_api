@@ -8,13 +8,30 @@ module GoogleCustomSearchApi
   ##
   # Search the site.
   #
-  def search(query, page = 0)
+  # opts 
+  #   see list here for valid options http://code.google.com/apis/customsearch/v1/using_rest.html#query-params
+  def search(query, opts = {})
     # Get and parse results.
-    url = url(query, page)
+    url = url(query, opts)
     puts url
     return nil unless results = fetch(url)
     results["items"] ||= []
     ResponseData.new(results)
+  end
+  
+  def search_and_return_all_results(query, opts = {})
+    res = []
+    opts[:start] ||= 1
+    begin
+      results = GoogleCustomSearchApi.search("poker",opts)
+      res << results
+      if results.queries.keys.include?("nextPage")
+        opts[:start] = results.queries.nextPage.first.startIndex
+      else
+        opts[:start] = nil
+      end
+    end while opts[:start].nil? == false
+    return res
   end
   
   # Convenience wrapper for the response Hash.
@@ -67,13 +84,12 @@ module GoogleCustomSearchApi
   ##
   # Build search request URL.
   #
-  def url(query, page = 0)
-    params = {
-      :q      => query,
-      :alt    => "json"
-    }
+  # see list here for valid options http://code.google.com/apis/customsearch/v1/using_rest.html#query-params
+  def url(query, opts = {})
+    opts[:q] = query
+    opts[:alt] ||= "json"
     uri = Addressable::URI.new
-    uri.query_values = params
+    uri.query_values = opts
     begin
       params.merge!(GOOGLE_SEARCH_PARAMS)
     rescue NameError
