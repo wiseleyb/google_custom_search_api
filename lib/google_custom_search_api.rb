@@ -13,7 +13,7 @@ module GoogleCustomSearchApi
   def search(query, opts = {})
     # Get and parse results.
     url = url(query, opts)
-    # puts url
+    puts url
     return nil unless results = fetch(url)
     results["items"] ||= []
     ResponseData.new(results)
@@ -23,7 +23,7 @@ module GoogleCustomSearchApi
     res = []
     opts[:start] ||= 1
     begin
-      results = GoogleCustomSearchApi.search("poker",opts)
+      results = GoogleCustomSearchApi.search(query,opts)
       res << results
       if results.queries.keys.include?("nextPage")
         opts[:start] = results.queries.nextPage.first.startIndex
