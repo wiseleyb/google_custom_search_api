@@ -58,6 +58,22 @@ or
   end
 ```
 
+You can get all ten pages at once by doing:
+
+```
+  results = GoogleCustomSearchApi.search_and_return_all_results(query, opts) 
+  results.size == 10
+  results.collect {|r| r.items.size }.sum == 100 #if there were 100 results
+```
+
+search_and_return_all_results also yields results as it goes:
+
+```
+  GoogleCustomSearchApi.search_and_return_all_results(query, opts) do |results|
+    results.items.size == 10
+  end
+```
+
 See [Custom Search](http://code.google.com/apis/customsearch/v1/using_rest.html) documentation for an explanation of all fields available.
 
 ### Paging

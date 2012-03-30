@@ -24,6 +24,8 @@ module GoogleCustomSearchApi
     opts[:start] ||= 1
     begin
       results = GoogleCustomSearchApi.search(query,opts)
+      # results = ResponseData.new(read_search_data("google_poker_#{opts[:start]}"))
+      yield results
       res << results
       if results.queries.keys.include?("nextPage")
         opts[:start] = results.queries.nextPage.first.startIndex
@@ -33,6 +35,10 @@ module GoogleCustomSearchApi
     end while opts[:start].nil? == false
     return res
   end
+  
+  # def read_search_data(fname)
+  #   JSON.parse(File.read("/Users/wiseleyb/dev/rubyx/icm/spec/fixtures/searches/#{fname}.json"))
+  # end
   
   # Convenience wrapper for the response Hash.
   # Converts keys to Strings. Crawls through all
