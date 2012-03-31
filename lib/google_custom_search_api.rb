@@ -16,6 +16,16 @@ module GoogleCustomSearchApi
     # puts url
     return nil unless results = fetch(url)
     results["items"] ||= []
+
+    if file_path =  opts[:save_json_to_file_path]
+      opts[:start] ||= 1
+      Dir.mkdir(file_path) unless Dir.exists?(file_path)
+      fname = "google_#{query.gsub(/[^0-9A-Za-z]/, '_')}_#{opts[:start]}.json"
+      file = File.join(file_path, fname)
+      File.delete(file) if File.exist?(file)
+      open(file,'w') do |f|; f.puts results.to_json; end    
+    end
+
     ResponseData.new(results)
   end
   
