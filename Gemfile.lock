@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    google_custom_search_api (0.0.1)
+    google_custom_search_api (0.0.4)
       httparty
 
 GEM
@@ -14,7 +14,7 @@ GEM
       multi_json
       multi_xml
     json (1.6.5)
-    multi_json (1.1.0)
+    multi_json (1.3.4)
     multi_xml (0.4.2)
     rspec (2.9.0)
       rspec-core (~> 2.9.0)
