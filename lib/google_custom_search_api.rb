@@ -2,6 +2,10 @@
 # Add search functionality (via Google Custom Search). Protocol reference at:
 # http://www.google.com/coop/docs/cse/resultsxml.html
 #
+
+require 'httparty'
+require 'addressable/uri'
+
 module GoogleCustomSearchApi
   extend self
   

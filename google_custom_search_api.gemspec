@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.files = %w( CHANGELOG.rdoc Gemfile Gemfile.lock init.rb LICENSE Rakefile README.md ) + Dir.glob("lib/**/*")
   s.require_paths = ["lib"]
   s.add_runtime_dependency "httparty"
+  s.add_runtime_dependency "addressable"
   s.add_development_dependency "rspec"
   s.add_development_dependency "webmock"
   s.add_development_dependency "json"
