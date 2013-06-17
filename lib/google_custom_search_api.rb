@@ -114,6 +114,7 @@ module GoogleCustomSearchApi
     else
       api_key = opts[:engine_keys]["GOOGLE_API_KEY"]
       search_cx = opts[:engine_keys]["GOOGLE_SEARCH_CX"]
+      opts.delete(:engine_keys)
     end
     uri = Addressable::URI.new
     uri.query_values = opts
