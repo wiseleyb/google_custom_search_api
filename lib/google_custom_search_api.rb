@@ -8,11 +8,11 @@ require 'addressable/uri'
 
 module GoogleCustomSearchApi
   extend self
-  
+
   ##
   # Search the site.
   #
-  # opts 
+  # opts
   #   see list here for valid options http://code.google.com/apis/customsearch/v1/using_rest.html#query-params
   def search(query, opts = {})
     # Get and parse results.
@@ -27,12 +27,12 @@ module GoogleCustomSearchApi
       fname = "google_#{query.gsub(/[^0-9A-Za-z]/, '_')}_#{opts[:start]}.json"
       file = File.join(file_path, fname)
       File.delete(file) if File.exist?(file)
-      open(file,'w') do |f|; f.puts results.to_json; end    
+      open(file,'w') do |f|; f.puts results.to_json; end
     end
 
     ResponseData.new(results)
   end
-  
+
   def search_and_return_all_results(query, opts = {})
     res = []
     opts[:start] ||= 1
@@ -49,11 +49,11 @@ module GoogleCustomSearchApi
     end while opts[:start].nil? == false
     return res
   end
-  
+
   # def read_search_data(fname)
   #   JSON.parse(File.read("/Users/wiseleyb/dev/rubyx/icm/spec/fixtures/searches/#{fname}.json"))
   # end
-  
+
   # Convenience wrapper for the response Hash.
   # Converts keys to Strings. Crawls through all
   # member data and converts any other Hashes it
@@ -62,7 +62,7 @@ module GoogleCustomSearchApi
   # to camel case.
   #
   # Usage:
-  # 
+  #
   #  rd = ResponseData.new("AlphaBeta" => 1, "Results" => {"Gamma" => 2, "delta" => [3, 4]})
   #  puts rd.alpha_beta
   #  => 1
@@ -97,10 +97,10 @@ module GoogleCustomSearchApi
       end
     end
   end
-  
-  
+
+
   private # -------------------------------------------------------------------
-  
+
   ##
   # Build search request URL.
   #
@@ -108,20 +108,28 @@ module GoogleCustomSearchApi
   def url(query, opts = {})
     opts[:q] = query
     opts[:alt] ||= "json"
+    if opts[:engine_keys].nil?
+      api_key = GOOGLE_API_KEY
+      search_cx = GOOGLE_SEARCH_CX
+    else
+      api_key = opts[:engine_keys]["GOOGLE_API_KEY"]
+      search_cx = opts[:engine_keys]["GOOGLE_SEARCH_CX"]
+      opts.delete(:engine_keys)
+    end
     uri = Addressable::URI.new
     uri.query_values = opts
     begin
       params.merge!(GOOGLE_SEARCH_PARAMS)
     rescue NameError
     end
-    "https://www.googleapis.com/customsearch/v1?key=#{GOOGLE_API_KEY}&cx=#{GOOGLE_SEARCH_CX}&#{uri.query}"
+    "https://www.googleapis.com/customsearch/v1?key=#{api_key}&cx=#{search_cx}&#{uri.query}"
   end
-  
+
   ##
   # Query Google, and make sure it responds.
   #
   def fetch(url)
     return HTTParty.get(url)
   end
-  
+
 end
