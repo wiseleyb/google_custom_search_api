@@ -26,6 +26,11 @@ You can get your ```GOOGLE_API_KEY``` from https://code.google.com/apis/console/
 
 You can get your ```GOOGLE_SEARCH_CX``` from http://www.google.com/cse/  Either create a custom engine or follow ```manage your existing search engines``` and go to your cse's Control panel.  ```GOOGLE_SEARCH_CX``` == ```Search engine unique ID```
 
+Alternatively you can supply a key to the `search` function. `api_key` and `cx_id`
+
+    results = GoogleCustomSearchApi.search("poker", {api_key: "", cx_id: ""})
+
+
 ### Searching the web, not just your site, with CSE
 
 Google CSE was set up so search specific sites.  To search the entire web simply go to http://www.google.com/cse/, find your CSE, go to it's control panel.

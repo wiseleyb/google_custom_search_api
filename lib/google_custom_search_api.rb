@@ -12,8 +12,10 @@ module GoogleCustomSearchApi
   ##
   # Search the site.
   #
-  # opts 
+  # opts
   #   see list here for valid options http://code.google.com/apis/customsearch/v1/using_rest.html#query-params
+  #   api_key: your google API key. Optional, else will look for constant
+  #   cx_id: your google custom search id. Optional, else will look for constant.
   def search(query, opts = {})
     # Get and parse results.
     url = url(query, opts)
@@ -108,13 +110,15 @@ module GoogleCustomSearchApi
   def url(query, opts = {})
     opts[:q] = query
     opts[:alt] ||= "json"
+    api_key = opts[:api_key] || GOOGLE_API_KEY
+    cx_id = opts[:cx_id] || GOOGLE_SEARCH_CX
     uri = Addressable::URI.new
     uri.query_values = opts
     begin
       params.merge!(GOOGLE_SEARCH_PARAMS)
     rescue NameError
     end
-    "https://www.googleapis.com/customsearch/v1?key=#{GOOGLE_API_KEY}&cx=#{GOOGLE_SEARCH_CX}&#{uri.query}"
+    "https://www.googleapis.com/customsearch/v1?key=#{api_key}&cx=#{cx_id}&#{uri.query}"
   end
   
   ##
