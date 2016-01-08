@@ -22,16 +22,25 @@ You need to configure ```GOOGLE_SEARCH_CX``` and ```GOOGLE_API_KEY``` to ```conf
   GOOGLE_API_KEY = "..."
   GOOGLE_SEARCH_CX = "..."
 ```
-You can get your ```GOOGLE_API_KEY``` from https://code.google.com/apis/console/b/0/?pli=1 - There are many choices - Simple API Access is probably what you want.  There are more elaborate authorization schemes available for Google services but those aren't currently implemented.
 
-You can get your ```GOOGLE_SEARCH_CX``` from http://www.google.com/cse/  Either create a custom engine or follow ```manage your existing search engines``` and go to your cse's Control panel.  ```GOOGLE_SEARCH_CX``` == ```Search engine unique ID```
+Google's API management is confusing at best. At the time of this writing you codes like so:
 
-### Searching the web, not just your site, with CSE
+### GOOGLE_API_KEY
 
-Google CSE was set up so search specific sites.  To search the entire web simply go to http://www.google.com/cse/, find your CSE, go to it's control panel.
+* Go to https://console.developers.google.com/project
+* Create a project, open it
+* Under `Explore other services` choose `Enable APIs and get credentials like keys`
+* Search for `custom search` and click on it
+* In the left column click on `Credentials`
+* Under `API keys` grab your key. This is your `GOOGLE_API_KEY`
 
-* in ```Basics``` under ```Search Preferences``` choose ```Search the entire web but emphasize included sites.```
-* in ```Sites``` add ```www.google.com```
+### GOOGLE_SEARCH_CX
+
+* Go to https://cse.google.com/cse
+* Create a search engine and click on it
+* Under `Setup > Tabs > Basic` find `Details` and click `Search engine ID`
+* This is your GOOGLE_SEARCH_CX
+* Make sure to add a site under `Sites to search`
 
 ## Use
 
@@ -58,23 +67,39 @@ or
   end
 ```
 
-You can get all ten pages at once by doing:
-
-```
-  results = GoogleCustomSearchApi.search_and_return_all_results(query, opts) 
-  results.size == 10
-  results.collect {|r| r.items.size }.sum == 100 #if there were 100 results
-```
-
-search_and_return_all_results also yields results as it goes:
-
-```
-  GoogleCustomSearchApi.search_and_return_all_results(query, opts) do |results|
-    results.items.size == 10
-  end
-```
-
 See [Custom Search](http://code.google.com/apis/customsearch/v1/using_rest.html) documentation for an explanation of all fields available.
+
+### Errors
+
+Custom Search only returns a maximum of 100 results so - if you try something like 
+
+```
+  results = GoogleCustomSearchApi.search('poker', start: 101)
+```
+You get error and empty items. 
+
+```
+	{
+	  "error"=> {
+	    "errors"=> [
+	      {
+	        "domain"=>"global", 
+	         "reason"=>"invalid", 
+	         "message"=>"Invalid Value"
+	      }
+	    ], 
+	    "code"=>400, 
+	    "message"=>"Invalid Value"
+	  }, 
+	  "items"=>[]
+	}
+```
+
+So check for:
+
+```
+  if results.try(:error) || results.items.empty?
+```
 
 ### Paging
 
@@ -92,7 +117,7 @@ The maximum number of pages CSE allows is 10 - or 100 results in total.  To walk
   start = 1
   begin
     results = GoogleCustomSearchApi.search("poker",:start => start)
-    if results.queries.keys.include?("nextPage")
+    if results.items && results.queries.keys.include?("nextPage")
       start = results.queries.nextPage.first.startIndex
     else
       start = nil
@@ -100,7 +125,19 @@ The maximum number of pages CSE allows is 10 - or 100 results in total.  To walk
   end while start.nil? == false
 ```
 
-If you just want all results you can use the method ```search_and_return_all_results(query, opts = {})``` works just like the normal search but iterates through all available results and puts them in an array.
+The basic search result information is contained in request:
+
+```
+  results.queries.request
+  => [{"title"=>"Google Custom Search - poker",
+  "totalResults"=>"0",
+  "searchTerms"=>"poker",
+  "count"=>10,
+  "inputEncoding"=>"utf8",
+  "outputEncoding"=>"utf8",
+  "safe"=>"off",
+  "cx"=>"..."}]
+```
 
 ### Encoding issues
 
@@ -130,13 +167,5 @@ To run tests
 * Based largely on the gem https://github.com/alexreisner/google_custom_search 
 * Awesome ResponseData class from https://github.com/mikedemers/rbing
 * Work done while working on a project for the company http://reInteractive.net in sunny Sydney.  A great ruby shop should you need help with something.
-
-## TODO
-* pretty light on the tests
-
-## Sample results
-
-See spec/fixtures/*.json for examples of data returned
-
 
 Copyright (c) 2012 Ben Wiseley, released under the MIT license
