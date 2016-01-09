@@ -16,19 +16,39 @@ module GoogleCustomSearchApi
   #   see list here for valid options
   #   http://code.google.com/apis/customsearch/v1/using_rest.html#query-params
   def search(query, opts = {})
+    opts[:start] ||= 1
+
+    if (page = opts.delete(:page))
+      page = page.to_i
+      opts[:start] = (page - 1).abs * 10 + 1
+    else
+      page = (opts[:start].to_i / 10) + 1
+    end
+    page = 10 if page > 10
+
     # Get and parse results.
     url = url(query, opts)
-    # puts url
     return nil unless results = fetch(url)
-    results["items"] ||= []
 
-    if file_path =  opts[:save_json_to_file_path]
-      opts[:start] ||= 1
-      Dir.mkdir(file_path) unless Dir.exists?(file_path)
-      fname = "google_#{query.gsub(/[^0-9A-Za-z]/, '_')}_#{opts[:start]}.json"
-      file = File.join(file_path, fname)
-      File.delete(file) if File.exist?(file)
-      open(file,'w') do |f|; f.puts results.to_json; end
+    results['items'] ||= []
+
+    # paging
+    if results.keys.include?('queries')
+      data = results['queries']['request'].first
+      results['pages'] = data['totalResults'].to_i / 10
+      results['pages'] = 10 if results['pages'] > 10
+      results['current_page'] = page.to_i
+
+      results['next_page'] = nil
+      results['previous_page'] = nil
+
+      if results['queries'].include?('nextPage') && page < 10
+        results['next_page'] = results['current_page'] + 1
+      end
+
+      if page > 1
+        results['previous_page'] = page - 1
+      end
     end
 
     ResponseData.new(results)
@@ -62,7 +82,7 @@ module GoogleCustomSearchApi
     res = []
     opts[:start] ||= 1
     begin
-      results = GoogleCustomSearchApi.search(query,opts)
+      results = GoogleCustomSearchApi.search(query, opts)
       return res unless results.keys.include?('queries')
       yield results if block_given?
       res << results

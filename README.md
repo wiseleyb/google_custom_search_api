@@ -69,6 +69,38 @@ or
   end
 ```
 
+### Paging
+
+Google only returns 10 results at a time and a maximum of 100 results. The easiest way to page through results if to use `:page`. Paging is 1 based (1-10). The default page is 1
+
+```
+  results = GoogleCustomerSearchApi.search("poker", page: 2)
+  results.pages == 10
+  results.current_page == 2
+  results.next_page == 3
+  results.previous_page == 1
+
+  results = GoogleCustomerSearchApi.search("poker", page: 1)
+  results.pages == 10
+  results.current_page == 1
+  results.next_page == 2
+  results.previous_page == nil
+
+  results = GoogleCustomerSearchApi.search("poker", page: 10)
+  results.pages == 10
+  results.current_page == 10
+  results.next_page == nil
+  results.previous_page == 9
+```
+
+You can also use `:start` - which can be any number between 1 and 99. The `:page` helpers won't be accurate with `:start`
+
+Example: get results 13-23
+
+```
+  results = GoogleCustomerSearchApi.search('poker', start: 13)
+```
+
 See [Custom Search](http://code.google.com/apis/customsearch/v1/using_rest.html) documentation for an explanation of all fields available.
 
 ### Search and return all results
