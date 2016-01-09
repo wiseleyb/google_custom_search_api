@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    google_custom_search_api (1.0.0)
+    google_custom_search_api (2.0.0)
       addressable
       httparty
 

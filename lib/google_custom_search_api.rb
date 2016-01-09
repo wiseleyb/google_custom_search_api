@@ -8,12 +8,13 @@ require 'addressable/uri'
 
 module GoogleCustomSearchApi
   extend self
-  
+
   ##
   # Search the site.
   #
-  # opts 
-  #   see list here for valid options http://code.google.com/apis/customsearch/v1/using_rest.html#query-params
+  # opts
+  #   see list here for valid options
+  #   http://code.google.com/apis/customsearch/v1/using_rest.html#query-params
   def search(query, opts = {})
     # Get and parse results.
     url = url(query, opts)
@@ -27,19 +28,43 @@ module GoogleCustomSearchApi
       fname = "google_#{query.gsub(/[^0-9A-Za-z]/, '_')}_#{opts[:start]}.json"
       file = File.join(file_path, fname)
       File.delete(file) if File.exist?(file)
-      open(file,'w') do |f|; f.puts results.to_json; end    
+      open(file,'w') do |f|; f.puts results.to_json; end
     end
 
     ResponseData.new(results)
   end
-  
+
+  ##
+  # Search the site for all available results (max 100)
+  #
+  # This isn't so useful because it's quite slow
+  #
+  # Returns an array of up to 10 search(query) results
+  #
+  # examples:
+  #
+  # results = search_and_return_all_results('poker')
+  # results.first.items.size # == 10
+  #
+  # search_and_resturn_all_results('poker') do |results|
+  #   results.items.size # == 10  10 times
+  # end
+  #
+  # search_and_return_all_results(
+  #   '"California cult winery known for its Rhône"') do |results|
+  #   results.items.size # == 3  1 time
+  # end
+  #
+  # opts
+  #   see list here for valid options
+  #   http://code.google.com/apis/customsearch/v1/using_rest.html#query-params
   def search_and_return_all_results(query, opts = {})
     res = []
     opts[:start] ||= 1
     begin
       results = GoogleCustomSearchApi.search(query,opts)
-      # results = ResponseData.new(read_search_data("google_poker_#{opts[:start]}"))
-      yield results
+      return res unless results.keys.include?('queries')
+      yield results if block_given?
       res << results
       if results.queries.keys.include?("nextPage")
         opts[:start] = results.queries.nextPage.first.startIndex
@@ -49,11 +74,7 @@ module GoogleCustomSearchApi
     end while opts[:start].nil? == false
     return res
   end
-  
-  # def read_search_data(fname)
-  #   JSON.parse(File.read("/Users/wiseleyb/dev/rubyx/icm/spec/fixtures/searches/#{fname}.json"))
-  # end
-  
+
   # Convenience wrapper for the response Hash.
   # Converts keys to Strings. Crawls through all
   # member data and converts any other Hashes it
@@ -62,8 +83,11 @@ module GoogleCustomSearchApi
   # to camel case.
   #
   # Usage:
-  # 
-  #  rd = ResponseData.new("AlphaBeta" => 1, "Results" => {"Gamma" => 2, "delta" => [3, 4]})
+  #
+  #  rd = ResponseData.new("AlphaBeta" => 1,
+  #                        "Results" => {
+  #                          "Gamma" => 2,
+  #                          "delta" => [3, 4]})
   #  puts rd.alpha_beta
   #  => 1
   #  puts rd.alpha_beta.results.gamma
@@ -76,6 +100,7 @@ module GoogleCustomSearchApi
     def initialize(data={})
       data.each_pair {|k,v| self[k.to_s] = deep_parse(v) }
     end
+
     def deep_parse(data)
       case data
       when Hash
@@ -86,10 +111,15 @@ module GoogleCustomSearchApi
         data
       end
     end
+
     def method_missing(*args)
       name = args[0].to_s
       return self[name] if has_key? name
-      camelname = name.split('_').map {|w| "#{w[0,1].upcase}#{w[1..-1]}" }.join("")
+
+      camelname = name.split('_').map do |w|
+        "#{w[0,1].upcase}#{w[1..-1]}"
+      end.join("")
+
       if has_key? camelname
         self[camelname]
       else
@@ -97,14 +127,15 @@ module GoogleCustomSearchApi
       end
     end
   end
-  
-  
-  private # -------------------------------------------------------------------
-  
+
+
+  private
+
   ##
   # Build search request URL.
   #
-  # see list here for valid options http://code.google.com/apis/customsearch/v1/using_rest.html#query-params
+  # see list here for valid options
+  # http://code.google.com/apis/customsearch/v1/using_rest.html#query-params
   def url(query, opts = {})
     opts[:q] = query
     opts[:alt] ||= "json"
@@ -114,14 +145,14 @@ module GoogleCustomSearchApi
       params.merge!(GOOGLE_SEARCH_PARAMS)
     rescue NameError
     end
-    "https://www.googleapis.com/customsearch/v1?key=#{GOOGLE_API_KEY}&cx=#{GOOGLE_SEARCH_CX}&#{uri.query}"
+    "https://www.googleapis.com/customsearch/v1?" \
+      "key=#{GOOGLE_API_KEY}&cx=#{GOOGLE_SEARCH_CX}&#{uri.query}"
   end
-  
+
   ##
   # Query Google, and make sure it responds.
   #
   def fetch(url)
     return HTTParty.get(url)
   end
-  
 end

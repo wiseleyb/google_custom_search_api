@@ -27,7 +27,7 @@ Google's API management is confusing at best. At the time of this writing you co
 
 ### GOOGLE_API_KEY
 
-* Go to https://console.developers.google.com/project
+* Go to [Google Projects](https://console.developers.google.com/project)
 * Create a project, open it
 * Under `Explore other services` choose `Enable APIs and get credentials like keys`
 * Search for `custom search` and click on it
@@ -36,13 +36,15 @@ Google's API management is confusing at best. At the time of this writing you co
 
 ### GOOGLE_SEARCH_CX
 
-* Go to https://cse.google.com/cse
+* Go to [Google CSE](https://cse.google.com/cse)
 * Create a search engine and click on it
 * Under `Setup > Tabs > Basic` find `Details` and click `Search engine ID`
 * This is your GOOGLE_SEARCH_CX
 * Make sure to add a site under `Sites to search`
 
 ## Use
+
+### Search
 
 To perform a search:
 
@@ -68,6 +70,24 @@ or
 ```
 
 See [Custom Search](http://code.google.com/apis/customsearch/v1/using_rest.html) documentation for an explanation of all fields available.
+
+### Search and return all results
+
+This method isn't so useful because it's pretty slow (do to fetching up to 10 pages from Google). Helpful for testing sometimes.
+
+```
+  results = search_and_return_all_results('poker')
+  results.first.items.size # == 10
+  
+  search_and_resturn_all_results('poker') do |results|
+    results.items.size # == 10  10 times
+  end
+  
+  search_and_return_all_results(
+    '"California cult winery known for its Rhône"') do |results|
+    results.items.size # == 3  1 time
+  end
+```
 
 ### Errors
 
