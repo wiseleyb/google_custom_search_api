@@ -152,43 +152,105 @@ So check for:
 ```
   if results.try(:error) || results.items.empty?
 ```
+### Rails example
 
-### Paging
-
-By default CSE returns a maximum of 10 results at a time, you can't get more results without paging. BTW if you want fewer results just pass in the :num => 1-10 option when searching.
-
-To do paging we pass in the :start option.  Example:
+In **Gemfile**
 
 ```
-  results = GoogleCustomSearchApi.search("poker", :start => 1)
+gem "google_custom_search_api"
 ```
 
-The maximum number of pages CSE allows is 10 - or 100 results in total.  To walk through the pages you can use :start => 1, :start => 11, etc. Or you can use the results to find the next value, like so:
+In **config/initializers/google_search.rb**
 
 ```
-  start = 1
-  begin
-    results = GoogleCustomSearchApi.search("poker",:start => start)
-    if results.items && results.queries.keys.include?("nextPage")
-      start = results.queries.nextPage.first.startIndex
-    else
-      start = nil
-    end
-  end while start.nil? == false
+GOOGLE_API_KEY = '...'
+GOOGLE_SEARCH_CX = '...'
 ```
 
-The basic search result information is contained in request:
+In **config/routes.rb**
 
 ```
-  results.queries.request
-  => [{"title"=>"Google Custom Search - poker",
-  "totalResults"=>"0",
-  "searchTerms"=>"poker",
-  "count"=>10,
-  "inputEncoding"=>"utf8",
-  "outputEncoding"=>"utf8",
-  "safe"=>"off",
-  "cx"=>"..."}]
+  get '/search' => 'search#index'
+```
+
+In **app/controllers/search_controller.rb** you'd have something like this:
+
+```
+class SearchController < ApplicationController
+  def index
+    if params[:q]
+      page = params[:page] || 1
+      @results = GoogleCustomSearchApi.search(params[:q],
+                                              page: page)
+	end
+  end
+end
+```
+
+And a simple view might look like this **app/search/index.html.erb** (this is using bootstrap styling)
+
+```
+<section class='search-section'>
+  <div class='text-center titles-with-yellow'>
+    <h1>Search/h1>
+  </div>
+  <div class='container'>
+    <div class='text-center search-bar'>
+      <%= form_tag search_path, method: :get  do %>
+        <div class="inner-addon right-addon">
+          <i class="glyphicon glyphicon-search"></i>
+          <%= text_field_tag :q, params[:q], class: 'form-control' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @results && !@results.items.empty? %>
+    <div class='container'>
+      <% @results.items.each do |item| %>
+        <div class='row'>
+          <h4><%= link_to item.htmlTitle.html_safe, item.link %></h4>
+          <div>
+            <% if item['pagemap'] &&
+                  item['pagemap']['cse_thumbnail'] &&
+                  img = item.pagemap.cse_thumbnail.first %>
+              <div class='col-sm-2'>
+                <%= image_tag(img.src, width: '200px') %>
+              </div>
+              <div class='col-sm-10'>
+                <%= item.htmlSnippet.html_safe %>
+              </div>
+            <% else %>
+              <%= item.htmlSnippet.html_safe %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class='container search-prev-next'>
+      <div class='row text-center'>
+        <% if @results.previous_page %>
+          <%= link_to '<< Previous',
+            search_path(q: params[:q], page: @results.previous_page),
+            class: 'btn' %>
+        <% end %>
+        <% @results.pages.times do |i| %>
+          <%= link_to i + 1,
+            search_path(q: params[:q], page: i+1),
+            class: 'btn btn-page' %>
+        <% end %>
+        <% if @results.next_page %>
+          <%= link_to 'Next >>',
+            search_path(q: params[:q],
+                        page: @results.next_page),
+            class: 'btn' %>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <h4>No results</h4>
+  <% end %>
+</section>
 ```
 
 ### Encoding issues
