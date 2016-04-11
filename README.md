@@ -8,11 +8,11 @@ Questions/comments, etc: wiseleyb@gmail.com
 
 Add to your Gemfile:
 
-  gem "google_custom_search_api"
+    gem "google_custom_search_api"
 
 then
 
-  bundle install
+    bundle install
 
 ## Configure
 
