@@ -8,19 +8,19 @@ Questions/comments, etc: wiseleyb@gmail.com
 
 Add to your Gemfile:
 
-  gem "google_custom_search_api"
+  `gem 'google_custom_search_api'`
 
 then
 
-  bundle install
+  `bundle install`
 
 ## Configure
 
-You need to configure ```GOOGLE_SEARCH_CX``` and ```GOOGLE_API_KEY``` to ```config/initializers/google_cse_api.rb```:
+Create the file ```config/initializers/google_cse_api.rb``` and configure ```GOOGLE_SEARCH_CX``` and ```GOOGLE_API_KEY```:
 
 ```
-  GOOGLE_API_KEY = "..."
-  GOOGLE_SEARCH_CX = "..."
+  GOOGLE_API_KEY = "key_here"
+  GOOGLE_SEARCH_CX = "cx_here"
 ```
 
 Google's API management is confusing at best. At the time of this writing you codes like so:
@@ -29,16 +29,17 @@ Google's API management is confusing at best. At the time of this writing you co
 
 * Go to [Google Projects](https://console.developers.google.com/project)
 * Create a project, open it
-* Under `Explore other services` choose `Enable APIs and get credentials like keys`
-* Search for `custom search` and click on it
-* In the left column click on `Credentials`
-* Under `API keys` grab your key. This is your `GOOGLE_API_KEY`
+* An API key can be obtained from the [Google Developers Console](https://console.developers.google.com)
+* From the `Library` section, click on `Custom Search API` from under `Other popular APIs` 
+* Enable Custom Search for the project you've created above, but clicking enable
+* In order to use the API, you need to create credentials. Do so by clicking "Go to Credentials"
+* An API key can be generated while creating your credentials. This is your `GOOGLE_API_KEY`
 
 ### GOOGLE_SEARCH_CX
 
 * Go to [Google CSE](https://cse.google.com/cse)
-* Create a search engine and click on it
-* Under `Setup > Tabs > Basic` find `Details` and click `Search engine ID`
+* Create search engine by clicking `Add` and filling in the details and clicking `Create` 
+* Open the new engine from listing page, or by clicking `Modify your search engine`. Under `Basic` tab find `Details` and click `Search engine ID`
 * This is your GOOGLE_SEARCH_CX
 * Make sure to add a site under `Sites to search`
 
