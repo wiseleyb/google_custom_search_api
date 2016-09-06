@@ -23,7 +23,7 @@ Create the file ```config/initializers/google_cse_api.rb``` and configure ```GOO
   GOOGLE_SEARCH_CX = "cx_here"
 ```
 
-Google's API management is confusing at best. At the time of this writing you codes like so:
+Google's API management is confusing at best. At the time of this writing you can generate the required codes like so:
 
 ### GOOGLE_API_KEY
 
