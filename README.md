@@ -31,7 +31,7 @@ Google's API management is confusing at best. At the time of this writing you co
 * Create a project, open it
 * An API key can be obtained from the [Google Developers Console](https://console.developers.google.com)
 * From the `Library` section, click on `Custom Search API` from under `Other popular APIs` 
-* Enable Custom Search for the project you've created above, but clicking enable
+* Enable Custom Search for the project you've created above, by clicking enable
 * In order to use the API, you need to create credentials. Do so by clicking "Go to Credentials"
 * An API key can be generated while creating your credentials. This is your `GOOGLE_API_KEY`
 
