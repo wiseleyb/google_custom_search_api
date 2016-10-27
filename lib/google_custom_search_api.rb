@@ -35,7 +35,7 @@ module GoogleCustomSearchApi
     # paging
     if results.keys.include?('queries')
       data = results['queries']['request'].first
-      results['pages'] = data['totalResults'].to_i / 10
+      results['pages'] = (data['totalResults'].to_i.to_f / 10).ceil
       results['pages'] = 10 if results['pages'] > 10
       results['current_page'] = page.to_i
 
