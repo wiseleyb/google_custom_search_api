@@ -212,6 +212,30 @@ And a simple view might look like this **app/search/index.html.erb** (this is us
           <h4><%= link_to item.htmlTitle.html_safe, item.link %></h4>
           <div>
             <% if item['pagemap'] &&
+<section class='search-section'>
+  <div class='page-header'>
+    <h1>Search</h1>
+  </div>
+  <div class='container'>
+    <div class='text-center search-bar'>
+      <%= form_tag search_path, method: :get  do %>
+        <div class="form-group">
+          <div class="input-group">
+            <%= text_field_tag :q, params[:q], class: 'form-control' %>
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @results && !@results.items.empty? %>
+    <div class='container'>
+      <% @results.items.each do |item| %>
+        <div class='row'>
+          <h4><%= link_to item.htmlTitle.html_safe, item.link %></h4>
+          <div>
+            <% if item['pagemap'] &&
                   item['pagemap']['cse_thumbnail'] &&
                   img = item.pagemap.cse_thumbnail.first %>
               <div class='col-sm-2'>
@@ -227,26 +251,35 @@ And a simple view might look like this **app/search/index.html.erb** (this is us
         </div>
       <% end %>
     </div>
-    <div class='container search-prev-next'>
-      <div class='row text-center'>
+    <nav aria-label="Page navigation" class='text-center'>
+      <ul class="pagination">
         <% if @results.previous_page %>
-          <%= link_to '<< Previous',
-            search_path(q: params[:q], page: @results.previous_page),
-            class: 'btn' %>
+          <li>
+            <%= link_to search_path(q: params[:q], page: @results.previous_page), { 'aria-label': 'First' } do %>
+              <span aria-hidden="true">&lsaquo;</span>
+            <% end %>
+          </li>
+        <% else %>
+          <li class='disabled'>
+            <span aria-hidden="true">&lsaquo;</span>
+          </li>
         <% end %>
         <% @results.pages.times do |i| %>
-          <%= link_to i + 1,
-            search_path(q: params[:q], page: i+1),
-            class: 'btn btn-page' %>
+          <li<% if i === params[:page].to_i - 1 %> class='active'<% else %> class='hidden-xs'<% end %>><%= link_to i + 1, search_path(q: params[:q], page: i + 1) %></li>
         <% end %>
         <% if @results.next_page %>
-          <%= link_to 'Next >>',
-            search_path(q: params[:q],
-                        page: @results.next_page),
-            class: 'btn' %>
+          <li>
+            <%= link_to search_path(q: params[:q], page: @results.next_page), { 'aria-label': 'Next' } do %>
+              <span aria-hidden="true">&rsaquo;</span>
+            <% end %>
+          </li>
+        <% else %>
+          <li class='disabled'>
+            <span aria-hidden="true">&rsaquo;</span>
+          </li>
         <% end %>
-      </div>
-    </div>
+      </ul>
+    </nav>
   <% else %>
     <h4>No results</h4>
   <% end %>
