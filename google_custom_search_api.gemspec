@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Ben Wiseley"]
   s.email       = ["wiseleyb@gmail.com"]
   s.homepage    = "http://github.com/wiseleyb/google_custom_search_api"
-  s.date        = Date.today.to_s
+  s.date        = Time.now
   s.summary     = "Ruby lib for Google's Custom Search Api."
   s.description = "Ruby lib for Google's Custom Search Api."
   # s.files       = `git ls-files`.split("\n") - %w[google_custom_search_api.gemspec Gemfile init.rb]
