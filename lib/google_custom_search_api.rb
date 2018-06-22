@@ -86,7 +86,7 @@ module GoogleCustomSearchApi
       return res unless results.keys.include?('queries')
       yield results if block_given?
       res << results
-      if results.queries.keys.include?("nextPage")
+      if results["queries"] and results.queries.keys.include?("nextPage")
         opts[:start] = results.queries.nextPage.first.startIndex
       else
         opts[:start] = nil
