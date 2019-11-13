@@ -1,6 +1,6 @@
 # Google Custom Search
 
-This project is a Ruby lib for Google's Custom Search ENgine API (http://www.google.com/cse).  There seem to be quite a few cse libs out there that don't work so I rolled this up quickly.
+This project is a Ruby lib for Google's Custom Search Engine API (http://www.google.com/cse).  There seem to be quite a few cse libs out there that don't work so I rolled this up quickly.
 
 Questions/comments, etc: wiseleyb@gmail.com
 
@@ -18,7 +18,7 @@ then
 
 You need to configure ```GOOGLE_SEARCH_CX``` and ```GOOGLE_API_KEY``` to ```config/initializers/google_cse_api.rb```:
 
-```
+```ruby
   GOOGLE_API_KEY = "..."
   GOOGLE_SEARCH_CX = "..."
 ```
@@ -48,14 +48,14 @@ Google's API management is confusing at best. At the time of this writing you co
 
 To perform a search:
 
-```
+```ruby
   results = GoogleCustomSearchApi.search("poker")
 ```
 Results now contains a raw version and a class'ed version of the data show in ```Sample results``` below.
 
 This means you can do:
 
-```
+```ruby
   results["items"].each do |item|
   	puts item["title"], item["link"]
   end
@@ -63,7 +63,7 @@ This means you can do:
 
 or
 
-```
+```ruby
   results.items.each do |item|
     puts item.title, item.link
   end
@@ -73,7 +73,7 @@ or
 
 Google only returns 10 results at a time and a maximum of 100 results. The easiest way to page through results if to use `:page`. Paging is 1 based (1-10). The default page is 1
 
-```
+```ruby
   results = GoogleCustomerSearchApi.search("poker", page: 2)
   results.pages == 10
   results.current_page == 2
@@ -97,7 +97,7 @@ You can also use `:start` - which can be any number between 1 and 99. The `:page
 
 Example: get results 13-23
 
-```
+```ruby
   results = GoogleCustomerSearchApi.search('poker', start: 13)
 ```
 
@@ -107,7 +107,7 @@ See [Custom Search](http://code.google.com/apis/customsearch/v1/using_rest.html)
 
 This method isn't so useful because it's pretty slow (do to fetching up to 10 pages from Google). Helpful for testing sometimes.
 
-```
+```ruby
   results = search_and_return_all_results('poker')
   results.first.items.size # == 10
   
@@ -125,12 +125,12 @@ This method isn't so useful because it's pretty slow (do to fetching up to 10 pa
 
 Custom Search only returns a maximum of 100 results so - if you try something like 
 
-```
+```ruby
   results = GoogleCustomSearchApi.search('poker', start: 101)
 ```
 You get error and empty items. 
 
-```
+```ruby
 	{
 	  "error"=> {
 	    "errors"=> [
@@ -149,33 +149,33 @@ You get error and empty items.
 
 So check for:
 
-```
+```ruby
   if results.try(:error) || results.items.empty?
 ```
 ### Rails example
 
 In **Gemfile**
 
-```
+```ruby
 gem "google_custom_search_api"
 ```
 
 In **config/initializers/google_search.rb**
 
-```
+```ruby
 GOOGLE_API_KEY = '...'
 GOOGLE_SEARCH_CX = '...'
 ```
 
 In **config/routes.rb**
 
-```
+```ruby
   get '/search' => 'search#index'
 ```
 
 In **app/controllers/search_controller.rb** you'd have something like this:
 
-```
+```ruby
 class SearchController < ApplicationController
   def index
     if params[:q]
@@ -189,7 +189,7 @@ end
 
 And a simple view might look like this **app/search/index.html.erb** (this is using bootstrap styling)
 
-```
+```erb
 <section class='search-section'>
   <div class='text-center titles-with-yellow'>
     <h1>Search/h1>
@@ -259,7 +259,7 @@ TODO - this section needs work
 
 CSE will return non utf-8 results which can be problematic.  I might add in a config value that you can explicitly set encoding.  Until then a work around is doing stuff like:
 
-```
+```ruby
   results.items.first.title.force_encoding(Encoding::UTF_8)
 ```
 
@@ -270,7 +270,7 @@ More on this here: http://code.google.com/apis/customsearch/docs/ref_encoding.ht
 Pull requests welcome.
 
 To run tests
-```
+```shell
   git clone git@github.com:wiseleyb/google_custom_search_api.git
   cd google_custom_search_api
   bundle install
